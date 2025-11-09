@@ -141,7 +141,9 @@ define('search', ['game', 'node', 'clone'], function(Game, Node, clone) {
     var theirPawnCount = theirs.length - theirKingCount;
     var ourDepthSum = depthSum(ours);
     var theirDepthSum = depthSum(theirs);
-
+    if (theirKingCount === 0 && theirPawnCount === 0) {
+      return 10000;
+    }
     return 10 * (5 * (ourKingCount - theirKingCount) +
                  3 * (ourPawnCount - theirPawnCount)) +
       ourDepthSum - theirDepthSum;
