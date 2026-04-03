@@ -70,7 +70,8 @@ define('search', ['game', 'node', 'clone'], function(Game, Node, clone) {
 
   function alphabeta(node, alpha, beta, max) {
     if (!node.children || node.children.length === 0) {
-      return heuristic(node);
+      node.value = heuristic(node);
+      return node.value;
     }
 
     var value;
