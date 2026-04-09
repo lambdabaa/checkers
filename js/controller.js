@@ -76,7 +76,9 @@ define('controller', ['move', 'piece'], function(Move, Piece) {
 
     computerMove: function() {
       console.log('postMessage to worker...');
-      this.worker.postMessage(this.game);
+      var depthSelect = document.querySelector('.depth-select');
+      var depth = depthSelect ? parseInt(depthSelect.value, 10) : 3;
+      this.worker.postMessage({ board: this.game.board, _playerToPieces: this.game._playerToPieces, depth: depth });
     },
 
     onMessage: function(event) {
