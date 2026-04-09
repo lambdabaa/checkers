@@ -16,7 +16,7 @@ require(['game', 'search', 'clone'], function(Game, Search, clone) {
     game.board = clone(event.data.board);
     game._playerToPieces = event.data._playerToPieces;
     game.player = -1;
-    var move = search.search(game);
+    var move = search.search(game, event.data.depth);
 
     // Possible WebWorker bug DataCloneError: The object could not be cloned.
     move.start = {

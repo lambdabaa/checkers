@@ -3,16 +3,17 @@ define('search', ['game', 'node', 'clone'], function(Game, Node, clone) {
   }
 
   Search.prototype = {
-    search: function(game) {
+    search: function(game, maxDepth) {
       console.log('Do search...');
-      var tree = buildTree(game);
+      var tree = buildTree(game, maxDepth);
       console.log('Searching tree with ' + tree.size() + ' nodes...');
       var move = minimax(tree);
       return move;
     }
   };
 
-  function buildTree(game) {
+  function buildTree(game, maxDepth) {
+    if (maxDepth === undefined) { maxDepth = 3; }
     var node = new Node({
       children: [],
       depth: 0,
@@ -22,7 +23,7 @@ define('search', ['game', 'node', 'clone'], function(Game, Node, clone) {
     var stack = [node];
     while (stack.length > 0) {
       var next = stack.pop();
-      if (next.depth > 3) {
+      if (next.depth > maxDepth) {
         continue;
       }
 
